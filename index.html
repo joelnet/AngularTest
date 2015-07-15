@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="Content/bootstrap.css" />
+    <link rel="stylesheet" href="Content/main.css" />
+    <script type="text/javascript" src="scripts/linq.min.js"></script>
+    <script type="text/javascript" src="scripts/angular.js"></script>
+    <script type="text/javascript" src="scripts/Resources.js"></script>
+    <script type="text/javascript" src="scripts/services/GithubApiService.js"></script>
+    <script type="text/javascript" src="scripts/controllers/GithubController.js"></script>
+    <script type="text/javascript" src="scripts/app.js"></script>
+</head>
+<body>
+
+    <h1>Angular Test for CashCall</h1>
+
+    <pre>
+        This test uses the GitHub API (https://api.github.com/) as a json data source.
+        1) Create a Single Page Application
+        2) Provide a text box on the first page that loads, typically index.html.
+        3) You should be able to type into this text box your favorite OSS project, when you tab out of it,
+           or with the addition of a button, under the covers this should then go out to GitHub and find all
+           the public repositories for that user (user) or organization (org).
+           (https://api.github.com/users/{user})  (https://api.github.com/orgs/{orgs})
+        4) Provide some of the details of this response and put them on the screen.
+        5) Enumerate all the repositories and provide links that are clickable to drill down into the repository
+           and then provide some of the details of this response.
+        6) Feel free to embellish to impress.
+    </pre>
+
+    <big>my notes:</big>
+
+    <blockquote>
+        <ul>
+            <li>This was written in TypeScript, therefore TypeScript source should be viewed (as opposed to the JavaScript source).</li>
+            <li>This application features a Data Model (GithubRepoModel) a Service (GithubApiService) and a Controller (GithubController). The Service is injected into the Controller using Angulars dependency injection.</li>
+            <li>The Service methods are written using Angular's $q implementation.</li>
+            <li>Data is pulled from both the users and orgs apis asynchronously.</li>
+            <li>Data is them combined, distinctly selected and sorted by watchers.</li>
+            <li>Formatting has intentionally been left plain since this is only a demonstration of angular.</li>
+        </ul>
+    </blockquote>
+
+    <div ng-app="angulartest" class="ng-cloak">
+
+        <div ng-controller="GithubController">
+
+            <div style="text-align:center;">
+
+                <div>
+                    <input type="text" ng-model="model.organizationName" ng-change="model.repos = null" ng-blur="ctrl.GetRepositories(model.organizationName)" /> <input type="button" ng-click="ctrl.GetRepositories(model.organizationName)" value="go" />
+
+                    <div ng-show="model.loadingRepos===true">Loading... {{model.loadingRepos}}</div>
+                </div>
+
+                <div ng-show="model.repos != null">
+                    found <span>{{model.repos.length || 0}}</span> repositories for {{model.organizationName}}.
+                </div>
+
+            </div>
+
+            <div ng-show="model.repos != null">
+
+
+                <div ng-show="model.repos.length > 0">
+
+                    <div ng-repeat="repo in model.repos" class="repo">
+
+                        <div class="row">
+                            <div class="col-sm-12 title"><a href="{{repo.html_url}}">{{repo.full_name}}</a> ({{repo.language || 'unknown'}})</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">{{repo.description}}</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-2">watchers: {{repo.watchers}}</div>
+                            <div class="col-sm-2">forks: {{repo.forks}}</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">git: {{repo.git_url}}</div>
+                        </div>
+
+                        <div class="row dates">
+                            <div class="col-sm-4">created at: {{repo.created_at | date:'medium'}}</div>
+                            <div class="col-sm-4">updated at: {{repo.updated_at | date:'medium'}}</div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
