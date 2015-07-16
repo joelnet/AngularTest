@@ -45,6 +45,8 @@
                     found <span>{{model.repos.length || 0}}</span> repositories for {{model.organizationName}}.
                 </div>
 
+                <div ng-show="model.error">{{model.error}}</div>
+
             </div>
 
             <div ng-show="model.repos != null">

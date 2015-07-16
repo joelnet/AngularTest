@@ -10,6 +10,7 @@
             organizationName: string;
             loadingRepos: boolean;
             repos: models.GithubRepoModel[];
+            error: string;
         }
     }
 
@@ -55,16 +56,16 @@
         private _InternalGetRepositories(organizationName): void
         {
             this.$scope.model.loadingRepos = true;
+            this.$scope.model.error = null;
 
             this.githubApiService.GetRepos(organizationName)
                 .then(repos =>
                 {
-                    console.log('repos', repos);
                     this.$scope.model.repos = repos;
                 })
                 .catch(err =>
                 {
-                    console.log('err', err);
+                    this.$scope.model.error = err;
                 })
                 .finally(() =>
                 {

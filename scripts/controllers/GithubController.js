@@ -29,11 +29,11 @@ var angulartest;
             GithubController.prototype._InternalGetRepositories = function (organizationName) {
                 var _this = this;
                 this.$scope.model.loadingRepos = true;
+                this.$scope.model.error = null;
                 this.githubApiService.GetRepos(organizationName).then(function (repos) {
-                    console.log('repos', repos);
                     _this.$scope.model.repos = repos;
                 }).catch(function (err) {
-                    console.log('err', err);
+                    _this.$scope.model.error = err;
                 }).finally(function () {
                     _this.$scope.model.loadingRepos = false;
                 });
