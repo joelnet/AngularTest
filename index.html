@@ -49,8 +49,25 @@
 
             <div ng-show="model.repos != null">
 
-
                 <div ng-show="model.repos.length > 0">
+
+                    <div class="org-header-wrapper">
+                        <img alt="@yeoman" class="avatar" height="100" itemprop="image" ng-src="{{model.repos[0].owner.avatar_url}}" width="100">
+                        <div class="org-header-info">
+                            <h1 class="org-name">
+                                <span>{{model.repos[0].owner.login}}</span>
+                            </h1>
+                            <p class="org-description" itemprop="description">The web's scaffolding tool for modern webapps</p>
+                            <ul class="org-header-meta has-blog">
+                                <li class="meta-item">
+                                    <span class="octicon octicon-link"></span>
+                                    <a href="{{model.repos[0].homepage}}">{{model.repos[0].homepage}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <hr/>
 
                     <div ng-repeat="repo in model.repos" class="repo">
 

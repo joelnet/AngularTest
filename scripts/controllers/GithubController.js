@@ -4,8 +4,9 @@ var angulartest;
     (function (Controllers) {
         "use strict";
         var GithubController = (function () {
-            function GithubController($scope, githubApiService) {
+            function GithubController($scope, $timeout, githubApiService) {
                 this.$scope = $scope;
+                this.$timeout = $timeout;
                 this.githubApiService = githubApiService;
                 if (githubApiService == null) {
                     throw new Error(angulartest.RESOURCES.Error_Argument_Null.replace(/\{0}/g, 'githubApiService'));
@@ -17,9 +18,15 @@ var angulartest;
                         organizationName: 'angular'
                     }
                 }, false);
-                //$scope.$watch('model.organizationName', () => this.recalculateAmounts());
             }
             GithubController.prototype.GetRepositories = function (organizationName) {
+                var _this = this;
+                if (this._getRepositoriesPromise != null) {
+                    this.$timeout.cancel(this._getRepositoriesPromise);
+                }
+                this._getRepositoriesPromise = this.$timeout(function () { return _this._InternalGetRepositories(organizationName); }, 250);
+            };
+            GithubController.prototype._InternalGetRepositories = function (organizationName) {
                 var _this = this;
                 this.$scope.model.loadingRepos = true;
                 this.githubApiService.GetRepos(organizationName).then(function (repos) {
@@ -31,7 +38,7 @@ var angulartest;
                     _this.$scope.model.loadingRepos = false;
                 });
             };
-            GithubController.$inject = ['$scope', 'GithubApiService'];
+            GithubController.$inject = ['$scope', '$timeout', 'GithubApiService'];
             return GithubController;
         })();
         Controllers.GithubController = GithubController;

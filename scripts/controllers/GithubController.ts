@@ -15,10 +15,13 @@
 
     export class GithubController
     {
-        public static $inject = ['$scope', 'GithubApiService'];
+        public static $inject = ['$scope', '$timeout', 'GithubApiService'];
+
+        private _getRepositoriesPromise: ng.IPromise<void>;
 
         constructor(
             private $scope: IGithubScope,
+            private $timeout: ng.ITimeoutService,
             private githubApiService: Services.GithubApiService
             )
         {
@@ -37,11 +40,19 @@
                     }
                 },
                 false);
-
-            //$scope.$watch('model.organizationName', () => this.recalculateAmounts());
         }
 
         public GetRepositories(organizationName): void
+        {
+            if (this._getRepositoriesPromise != null)
+            {
+                this.$timeout.cancel(this._getRepositoriesPromise);
+            }
+
+            this._getRepositoriesPromise = this.$timeout(() => this._InternalGetRepositories(organizationName), 250);
+        }
+
+        private _InternalGetRepositories(organizationName): void
         {
             this.$scope.model.loadingRepos = true;
 
@@ -60,5 +71,6 @@
                     this.$scope.model.loadingRepos = false;
                 });
         }
+
     }
 }

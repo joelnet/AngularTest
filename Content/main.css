@@ -12,4 +12,12 @@
 .repo .row {
   margin-bottom: 4px;
 }
+.org-header-wrapper .avatar {
+  float: left;
+  margin-right: 20px;
+}
+.org-header-wrapper ul {
+  position: relative;
+  left: 17px;
+}
 /*# sourceMappingURL=main.css.map */
