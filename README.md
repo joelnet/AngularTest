@@ -28,5 +28,5 @@
 * Formatting has intentionally been left plain since this is only a demonstration of angular.
 * This has been tested with Chrome, Firefox, Internet Explorer.
 * Users / Orgs tested: `angular` and `chrome`
-* The request implementes a small delay to prevent simultaneous firing of both `blur` and `click` events.
+* The request implementes a small delay (using angular's `$timeout`) to prevent simultaneous firing of both `blur` and `click` events.
 * This took 4.5 hours to complete.
