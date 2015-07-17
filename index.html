@@ -60,7 +60,7 @@
                                 <span>{{model.repos[0].owner.login}}</span>
                             </h1>
                             <p class="org-description" itemprop="description">The web's scaffolding tool for modern webapps</p>
-                            <ul class="org-header-meta has-blog">
+                            <ul ng-show="model.repos[0].homepage" class="org-header-meta has-blog">
                                 <li class="meta-item">
                                     <span class="octicon octicon-link"></span>
                                     <a href="{{model.repos[0].homepage}}">{{model.repos[0].homepage}}</a>

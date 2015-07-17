@@ -34,7 +34,7 @@ module angulartest.Services
                         {
                             if (err.status != 404)
                             {
-                                err[0] = err;
+                                errors[0] = err;
                             }
                         }),
                     this._GetRepos(this._orgsUrl.replace(/\{0}/g, name))
@@ -42,7 +42,7 @@ module angulartest.Services
                         {
                             if (err.status != 404)
                             {
-                                err[1] = err;
+                                errors[1] = err;
                             }
                         }),
                 ])
