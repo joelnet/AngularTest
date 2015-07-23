@@ -1,4 +1,4 @@
-# AngularTest-CashCall
+# AngularTest
 
 >This test uses the GitHub API (https://api.github.com/) as a json data source.
 >
@@ -17,14 +17,14 @@
 
 * This was written in TypeScript, therefore TypeScript source should be viewed (as opposed to the JavaScript source).
 * This application features
-  a [Data Model (`GithubRepoModel`)](https://github.com/joelnet/AngularTest-CashCall/blob/master/scripts/models/GithubRepoModels.ts)
-  a [Service (`GithubApiService`)](https://github.com/joelnet/AngularTest-CashCall/blob/master/scripts/services/GithubApiService.ts) and
-  a [Controller (`GithubController`)](https://github.com/joelnet/AngularTest-CashCall/blob/master/scripts/controllers/GithubController.ts).
-  The Service is injected into the Controller using Angulars dependency injection and can be viewed in [app.ts](https://github.com/joelnet/AngularTest-CashCall/blob/master/scripts/app.ts).
+  a [Data Model (`GithubRepoModel`)](https://github.com/joelnet/AngularTest/blob/master/scripts/models/GithubRepoModels.ts)
+  a [Service (`GithubApiService`)](https://github.com/joelnet/AngularTest/blob/master/scripts/services/GithubApiService.ts) and
+  a [Controller (`GithubController`)](https://github.com/joelnet/AngularTest/blob/master/scripts/controllers/GithubController.ts).
+  The Service is injected into the Controller using Angulars dependency injection and can be viewed in [app.ts](https://github.com/joelnet/AngularTest/blob/master/scripts/app.ts).
 * The Service's methods are written using Angular's $q implementation.
 * Data is pulled from both the users and orgs apis asynchronously.
 * Data is them combined, distinctly selected and sorted (descending) by the 'watchers' field using LINQ.
-  [view at line 56](https://github.com/joelnet/AngularTest-CashCall/blob/master/scripts/services/GithubApiService.ts)
+  [view at line 56](https://github.com/joelnet/AngularTest/blob/master/scripts/services/GithubApiService.ts)
 * Formatting has intentionally been left plain since this is only a demonstration of angular.
 * This has been tested with Chrome, Firefox, Internet Explorer.
 * Users / Orgs tested: `angular` and `chrome`
