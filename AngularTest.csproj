@@ -73,6 +73,7 @@
     <Content Include="Content\main.min.css">
       <DependentUpon>main.css</DependentUpon>
     </Content>
+    <Content Include="Content\test.txt" />
     <Content Include="index.html" />
     <Content Include="scripts\angular.js" />
     <Content Include="scripts\angular.min.js">
